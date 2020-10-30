@@ -5,7 +5,7 @@ spring:
 opentracing:
   jaeger:
     udp-sender:
-      host: jaeger
+      host: localhost
       port: 5775
 
 url: "http://viacep.com.br/ws/{cep}/json"
