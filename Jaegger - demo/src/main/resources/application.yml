@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: endereco
+
+opentracing:
+  jaeger:
+    udp-sender:
+      host: jaeger
+      port: 5775
+
+url: "http://viacep.com.br/ws/{cep}/json"
