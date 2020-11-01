@@ -1,0 +1,12 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: tutorial1
+opentracing:
+  jaeger:
+    udp-sender:
+      host: localhost
+      port: 5775
+
+

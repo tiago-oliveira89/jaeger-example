@@ -1,0 +1,12 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: heloService
+opentracing:
+  jaeger:
+    udp-sender:
+      host: localhost
+      port: 5775
+
+
