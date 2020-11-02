@@ -8,6 +8,7 @@ import io.opentracing.Scope;
 import io.opentracing.Span;
 import io.opentracing.Tracer;
 import io.opentracing.tag.Tags;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,12 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/transfer")
-public class TransferController {
+public class TransferReceiveController {
 
     private final Tracer tracer;
 
-    private TransferController() {
-        this.tracer = TracerConfig.initTracer("payment-integration");
+    private TransferReceiveController() {
+        this.tracer = TracerConfig.initTracer("bank.transfer-receive");
     }
 
     @PostMapping
@@ -35,6 +36,7 @@ public class TransferController {
             HttpStatus httpStatus = validate(transfer);
             Tags.SPAN_KIND.set(tracer.activeSpan(), Tags.SPAN_KIND_PRODUCER);
             Tags.HTTP_STATUS.set(tracer.activeSpan(), httpStatus.value());
+            Tags.HTTP_METHOD.set(tracer.activeSpan(), HttpMethod.POST.name());
             return new ResponseEntity(httpStatus);
         } finally {
             span.finish();
